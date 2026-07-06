@@ -90,4 +90,4 @@ vite.config.ts
 
 ## License
 
-See the `LICENSE` file. (MIT recommended for a project like this.)
+See the `LICENSE` file. 

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cash Compass Organization, Financial Clarity for Small Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    /* Ink & paper */
+    --ink:#0b1930; --ink-soft:#3b4a63; --ink-faint:#7a8699;
+    --paper:#f6f9ff; --card:#ffffff; --line:#dfe6f2; --line-soft:#ecf1fa;
+
+    /* Blue */
+    --blue:#2563eb; --blue-dark:#1d4ed8; --blue-light:#60a5fa; --blue-soft:#e0ecff;
+    /* Orange */
+    --orange:#f97316; --orange-dark:#ea580c; --orange-light:#fdba74; --orange-soft:#ffedd5;
+    /* Supporting */
+    --gold:#eab308; --gold-soft:#fef3c7;
+    --rose:#e11d48; --rose-soft:#ffe4e6;
+    --sky:#0ea5e9; --sky-soft:#e0f2fe;
+
+    /* Signature gradient */
+    --grad: linear-gradient(135deg, #2563eb 0%, #6366f1 45%, #f97316 100%);
+    --grad-soft: linear-gradient(135deg, #e0ecff 0%, #ffedd5 100%);
+    --grad-text: linear-gradient(120deg, #1d4ed8, #f97316);
+
+    --radius:16px; --radius-sm:10px;
+    --shadow:0 1px 2px rgba(11,25,48,.04), 0 10px 30px -12px rgba(37,99,235,.18);
+    --shadow-lift:0 4px 12px rgba(11,25,48,.06), 0 20px 40px -18px rgba(249,115,22,.28);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink); line-height:1.55; -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1200px 600px at -10% -20%, rgba(37,99,235,.10), transparent 60%),
+      radial-gradient(1000px 500px at 110% 10%, rgba(249,115,22,.10), transparent 55%),
+      var(--paper);
+    min-height:100vh;
+  }
+  .display, h1, h2, h3, h4{font-family:'Playfair Display','Georgia',serif;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+
+  .grad-text{
+    background:var(--grad-text); -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,249,255,.82);backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+  .logo{
+    width:42px;height:42px;border-radius:12px;
+    background:var(--grad); background-size:200% 200%;
+    display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;
+    font-family:'Playfair Display',serif;font-weight:700;font-size:22px;
+    box-shadow:0 6px 18px rgba(37,99,235,.35);
+    animation:gradShift 8s ease infinite;
+    transition:transform .3s ease;
+  }
+  .logo:hover{transform:rotate(-6deg) scale(1.06)}
+  @keyframes gradShift{
+    0%,100%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+  }
+  .brand-name{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;line-height:1.1}
+  .brand-sub{font-size:11.5px;color:var(--ink-faint);letter-spacing:.02em;margin-top:2px}
+  .biz-name-input{
+    border:1px solid var(--line);background:var(--card);border-radius:10px;
+    padding:9px 13px;font:inherit;font-size:13.5px;font-weight:500;width:220px;color:var(--ink);
+    transition:.2s;
+  }
+  .biz-name-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+  .btn{
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    padding:9px 15px;border-radius:10px;font:inherit;font-size:13px;font-weight:500;
+    cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.2s;white-space:nowrap;
+  }
+  .btn:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:var(--shadow)}
+  .btn-primary{background:var(--grad);color:#fff;border:none;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+  .btn-primary:hover{color:#fff;transform:translateY(-2px);box-shadow:0 10px 22px rgba(249,115,22,.35)}
+  .btn-ghost{background:transparent;border-color:transparent}
+  .btn-ghost:hover{background:var(--line-soft);transform:none}
+  .btn-sm{padding:7px 12px;font-size:12px}
+  .save-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block;box-shadow:0 0 0 4px rgba(249,115,22,.18);animation:pulse 2s ease infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(249,115,22,.18)}50%{box-shadow:0 0 0 8px rgba(249,115,22,0)}}
+  .save-hint{font-size:11.5px;color:var(--ink-faint);display:flex;align-items:center;gap:7px}
+
+  /* ---------- tabs ---------- */
+  .tabs{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;gap:2px;overflow-x:auto}
+  .tab{
+    padding:14px 18px;font-size:13.5px;font-weight:500;color:var(--ink-soft);
+    cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.2s;
+    display:flex;align-items:center;gap:8px;position:relative;
+  }
+  .tab:hover{color:var(--blue)}
+  .tab.active{color:var(--blue-dark);font-weight:600}
+  .tab.active::after{
+    content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;border-radius:3px;
+    background:var(--grad); background-size:200% 200%;
+    animation:gradShift 5s ease infinite;
+  }
+  .tab .ic{width:16px;height:16px;flex-shrink:0}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:30px 22px 80px}
+  .page{display:none;animation:fade .45s cubic-bezier(.2,.7,.2,1)}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .page-head{margin-bottom:26px}
+  .page-head h1{font-size:34px;margin-bottom:6px}
+  .page-head p{color:var(--ink-soft);font-size:14.5px;max-width:680px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transition:.25s}
+  .card:hover{box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+  .card-pad{padding:22px 24px}
+  .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+  .card-head h3{font-size:19px}
+  .card-head .sub{font-size:12.5px;color:var(--ink-faint);font-weight:400;margin-top:2px;font-family:'Inter',sans-serif}
+  .grid{display:grid;gap:18px}
+  .section-label{
+    font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--blue-dark);margin:26px 0 12px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;
+  }
+  .section-label::after{content:"";height:1px;background:linear-gradient(90deg,var(--blue-soft),transparent);flex:1}
+
+  /* ---------- inputs ---------- */
+  label.field{display:block;margin-bottom:14px}
+  .field-lbl{font-size:12.5px;font-weight:500;color:var(--ink-soft);margin-bottom:6px;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
+  .inp{
+    width:100%;border:1px solid var(--line);background:#fbfcff;border-radius:10px;
+    padding:10px 13px;font:inherit;font-size:14px;color:var(--ink);transition:.2s;
+  }
+  .inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft);background:#fff}
+  .inp-affix{position:relative}
+  .inp-affix .pre{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:13px;pointer-events:none}
+  .inp-affix .inp{padding-left:26px}
+  select.inp{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a8699' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 12px center}
+  .hint{font-size:11.5px;color:var(--ink-faint);margin-top:4px}
+
+  /* ---------- stat cards ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 18px;position:relative;overflow:hidden;transition:.25s}
+  .stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+  .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad)}
+  .stat.orange::before{background:linear-gradient(180deg,var(--orange),var(--orange-dark))}
+  .stat.gold::before{background:linear-gradient(180deg,var(--gold),var(--orange))}
+  .stat.sky::before{background:linear-gradient(180deg,var(--sky),var(--blue))}
+  .stat.rose::before{background:linear-gradient(180deg,var(--rose),var(--orange-dark))}
+  .stat-lbl{font-size:11.5px;color:var(--ink-faint);font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:.06em}
+  .stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;line-height:1;letter-spacing:-.01em}
+  .stat-note{font-size:11px;color:var(--ink-faint);margin-top:6px}
+  .stat-val.neg{color:var(--rose)} .stat-val.pos{color:var(--blue-dark)}
+
+  /* ---------- tables ---------- */
+  .tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+  .tbl th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;padding:10px;border-bottom:1px solid var(--line)}
+  .tbl th.num,.tbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .tbl td{padding:11px 10px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl .row-strong td{font-weight:700;background:linear-gradient(90deg,var(--blue-soft),var(--orange-soft));color:var(--ink)}
+  .tbl-scroll{overflow-x:auto}
+
+  /* ---------- product rows ---------- */
+  .prod-card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin-bottom:14px;background:#fbfcff;position:relative;transition:.25s}
+  .prod-card:hover{border-color:var(--blue-light);box-shadow:var(--shadow-lift);transform:translateY(-2px)}
+  .prod-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .prod-num{
+    width:30px;height:30px;border-radius:9px;background:var(--grad);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-weight:600;font-size:14px;flex-shrink:0;font-family:'Playfair Display',serif;
+    box-shadow:0 4px 10px rgba(37,99,235,.28);
+  }
+  .prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .prod-calc{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:22px}
+  .mini-stat .l{font-size:10.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .mini-stat .v{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;margin-top:3px}
+  .del-prod{position:absolute;top:14px;right:14px;background:transparent;border:none;color:var(--ink-faint);cursor:pointer;font-size:18px;line-height:1;padding:5px;border-radius:6px;transition:.2s}
+  .del-prod:hover{background:var(--rose-soft);color:var(--rose);transform:rotate(90deg)}
+
+  /* ---------- expense rows ---------- */
+  .exp-row{display:grid;grid-template-columns:1fr 130px 34px;gap:10px;align-items:center;margin-bottom:8px}
+  .exp-row .inp{margin:0}
+  .add-line{
+    color:var(--blue-dark);background:transparent;border:1px dashed var(--blue);border-radius:10px;
+    padding:10px 14px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;width:100%;margin-top:6px;transition:.2s;
+  }
+  .add-line:hover{background:var(--blue-soft);border-style:solid;transform:translateY(-1px)}
+  .exp-cat{margin-bottom:20px}
+  .exp-cat-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .exp-cat-head .dot{width:10px;height:10px;border-radius:3px}
+  .exp-cat-head h4{font-size:15.5px;font-weight:600}
+  .exp-cat-total{margin-left:auto;font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);font-family:'Playfair Display',serif}
+
+  /* ---------- benchmarking ---------- */
+  .bench-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .method-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:18px;background:#fbfcff;transition:.25s}
+  .method-card:hover{border-color:var(--orange-light);transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+  .method-card h4{font-size:15.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .method-card p{font-size:12.5px;color:var(--ink-soft);margin-bottom:8px;line-height:1.6}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;font-family:'Inter',sans-serif}
+  .badge.blue{background:var(--blue-soft);color:var(--blue-dark)}
+  .badge.orange{background:var(--orange-soft);color:var(--orange-dark)}
+  .badge.gold{background:var(--gold-soft);color:#92400e}
+  .badge.sky{background:var(--sky-soft);color:#0369a1}
+  .qual-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .qual-item:last-child{border:none}
+  .qual-ic{
+    width:32px;height:32px;border-radius:9px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--grad);color:#fff;
+  }
+  .qual-ic svg{width:16px;height:16px}
+  .script-box{background:linear-gradient(135deg,var(--blue-soft),var(--orange-soft));border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink);position:relative;margin-top:10px;line-height:1.6}
+  .copy-btn{position:absolute;top:10px;right:10px;font-size:11px;padding:5px 11px;border-radius:7px;border:1px solid var(--blue);background:#fff;color:var(--blue-dark);cursor:pointer;font-weight:600;transition:.2s}
+  .copy-btn:hover{background:var(--blue);color:#fff}
+
+  /* ---------- callout ---------- */
+  .callout{border-radius:var(--radius-sm);padding:16px 18px;font-size:13.5px;display:flex;gap:12px;align-items:flex-start;line-height:1.6}
+  .callout.info{background:var(--sky-soft);color:#0c4a6e;border-left:4px solid var(--sky)}
+  .callout.tip{background:var(--blue-soft);color:var(--blue-dark);border-left:4px solid var(--blue)}
+  .callout.warn{background:var(--orange-soft);color:var(--orange-dark);border-left:4px solid var(--orange)}
+  .callout .ic{flex-shrink:0;margin-top:1px}
+  .callout .ic svg{width:20px;height:20px;display:block}
+
+  /* ---------- benchmark inputs ---------- */
+  .comp-inp{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;text-align:right;font-variant-numeric:tabular-nums;transition:.2s}
+  .comp-inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+
+  /* ---------- chart ---------- */
+  .chart-box{position:relative;height:320px}
+  .chart-box.sm{height:240px}
+
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+  .empty{text-align:center;padding:44px 20px;color:var(--ink-faint)}
+  .empty svg{width:48px;height:48px;opacity:.5;margin-bottom:12px}
+
+  @media(max-width:860px){
+    .split,.bench-grid{grid-template-columns:1fr}
+    .biz-name-input{width:150px}
+    .brand-sub{display:none}
+  }
+  @media(max-width:560px){
+    .topbar-inner{padding:12px 15px}
+    .wrap{padding:22px 15px 60px}
+    .exp-row{grid-template-columns:1fr 100px 32px}
+    .page-head h1{font-size:28px}
+  }
+  /* toast */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:12px;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:.3s;z-index:100;box-shadow:0 12px 30px rgba(11,25,48,.25)}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* hero banner */
+  .hero-banner{
+    position:relative; overflow:hidden;
+    border-radius:20px; padding:28px 30px;
+    background:var(--grad); background-size:200% 200%;
+    animation:gradShift 12s ease infinite;
+    color:#fff; margin-bottom:28px;
+    box-shadow:0 20px 50px -20px rgba(37,99,235,.5);
+  }
+  .hero-banner::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(600px 200px at 90% 0%, rgba(255,255,255,.25), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-banner h2{font-size:24px;margin-bottom:4px;color:#fff}
+  .hero-banner p{font-size:13.5px;opacity:.9;max-width:560px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">C</div>
+      <div>
+        <div class="brand-name">Cash Compass <span style="font-weight:400;font-style:italic;color:var(--orange-dark)">Organization</span></div>
+        <div class="brand-sub">Financial clarity for small businesses</div>
+      </div>
+    </div>
+    <input class="biz-name-input" id="bizName" placeholder="Your business name" oninput="save()">
+    <span class="save-hint"><span class="save-dot"></span><span id="saveTxt">Saved locally</span></span>
+    <button class="btn btn-sm" onclick="exportData()" title="Download your data as a file">Backup</button>
+    <button class="btn btn-sm" onclick="importData()" title="Restore from a backup file">Restore</button>
+    <button class="btn btn-sm btn-primary" id="loginBtn" onclick="fakeLogin()">Sign in with Google</button>
+  </div>
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-tab="products">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      Products &amp; Pricing
+    </div>
+    <div class="tab" data-tab="expenses">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+      Costs
+    </div>
+    <div class="tab" data-tab="revenue">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      Revenue &amp; Projection
+    </div>
+    <div class="tab" data-tab="benchmark">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      Benchmarking
+    </div>
+    <div class="tab" data-tab="summary">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Dashboard
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ PRODUCTS ============ -->
+<div class="page active" id="page-products">
+  <div class="page-head">
+    <h1 class="display">Products &amp; <span class="grad-text">Pricing</span></h1>
+    <p>Add every product you sell. Enter what it costs you to make one unit and your target profit margin. Cash Compass calculates your cost per unit (HPP) and suggested selling price automatically.</p>
+  </div>
+
+  <div class="callout tip" style="margin-bottom:20px">
+    <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.3A7 7 0 0 0 12 2z"/><line x1="9" y1="22" x2="15" y2="22"/></svg></div>
+    <div><strong>HPP</strong> (Harga Pokok Penjualan, cost of goods) is what one unit costs you to produce. Your selling price equals HPP plus your margin. Fill the fields and watch the numbers update live.</div>
+  </div>
+
+  <div id="prodList"></div>
+  <button class="add-line" onclick="addProduct()">+ Add a product</button>
+
+  <div class="section-label">Pricing summary</div>
+  <div class="card card-pad">
+    <div class="tbl-scroll">
+      <table class="tbl" id="priceTbl">
+        <thead><tr>
+          <th>Product</th>
+          <th class="num">Cost / unit (HPP)</th>
+          <th class="num">Margin</th>
+          <th class="num">Selling price</th>
+          <th class="num">Profit / unit</th>
+          <th class="num">Monthly units</th>
+          <th class="num">Monthly revenue</th>
+        </tr></thead>
+        <tbody id="priceBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXPENSES ============ -->
+<div class="page" id="page-expenses">
+  <div class="page-head">
+    <h1 class="display">Track your <span class="grad-text">Costs</span></h1>
+    <p>Group your spending so you can see where money goes. Capex is one-time investment such as equipment or setup. Opex is what you spend to keep running each month across production, operations, and marketing.</p>
+  </div>
+
+  <div class="split">
+    <div>
+      <div class="card card-pad exp-cat">
+        <div class="exp-cat-head"><span class="dot" style="background:var(--blue)"></span><h4>Capex, one-time investment</h4><span class="exp-cat-total" id="tot-capex">$0</span></div>
+        <div id="rows-capex"></div>
+        <button class="add-line" onclick="addExpense('capex')">+ Add capex item</button>
+        <div class="hint" style="margin-top:8px">Examples: equipment, factory setup, storage tanks, licensing fees.</div>
+      </div>
+
+      <div class="card card-pad exp-cat">
+        <div class="exp-cat-head"><span class="dot" style="background:var(--orange)"></span><h4>Production, monthly</h4><span class="exp-cat-total" id="tot-production">$0</span></div>
+        <div id="rows-production"></div>
+        <button class="add-line" onclick="addExpense('production')">+ Add production cost</button>
+        <div class="hint" style="margin-top:8px">Examples: raw materials, ingredients, labor, quality testing.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card card-pad exp-cat">
+        <div class="exp-cat-head"><span class="dot" style="background:var(--gold)"></span><h4>Operations, monthly</h4><span class="exp-cat-total" id="tot-operations">$0</span></div>
+        <div id="rows-operations"></div>
+        <button class="add-line" onclick="addExpense('operations')">+ Add operations cost</button>
+        <div class="hint" style="margin-top:8px">Examples: rent, electricity, water, maintenance, procurement.</div>
+      </div>
+
+      <div class="card card-pad exp-cat">
+        <div class="exp-cat-head"><span class="dot" style="background:var(--rose)"></span><h4>Marketing, monthly</h4><span class="exp-cat-total" id="tot-marketing">$0</span></div>
+        <div id="rows-marketing"></div>
+        <button class="add-line" onclick="addExpense('marketing')">+ Add marketing cost</button>
+        <div class="hint" style="margin-top:8px">Examples: ads, influencer, partnerships, social media.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Cost overview</div>
+  <div class="stats">
+    <div class="stat sky"><div class="stat-lbl">Total capex (one-time)</div><div class="stat-val" id="s-capex">$0</div></div>
+    <div class="stat orange"><div class="stat-lbl">Monthly operating cost</div><div class="stat-val" id="s-opex">$0</div><div class="stat-note">production + operations + marketing</div></div>
+    <div class="stat gold"><div class="stat-lbl">Annual operating cost</div><div class="stat-val" id="s-opex-yr">$0</div></div>
+    <div class="stat rose"><div class="stat-lbl">Break-even units / month</div><div class="stat-val" id="s-breakeven">-</div><div class="stat-note">to cover fixed costs</div></div>
+  </div>
+</div>
+
+<!-- ============ REVENUE ============ -->
+<div class="page" id="page-revenue">
+  <div class="page-head">
+    <h1 class="display">Revenue &amp; <span class="grad-text">5-year Projection</span></h1>
+    <p>Set how many units you expect to sell and how fast you will grow each year. Cash Compass projects your revenue, profit (EBITDA), and returns, the same numbers investors look for.</p>
+  </div>
+
+  <div class="split">
+    <div class="card card-pad">
+      <div class="card-head"><div><h3>Growth assumptions</h3><div class="sub">Applied on top of your product sales volumes</div></div></div>
+      <label class="field">
+        <span class="field-lbl">Base year</span>
+        <input class="inp" id="baseYear" type="number" value="2025" oninput="recalc()">
+      </label>
+      <label class="field">
+        <span class="field-lbl">Yearly sales growth <span class="hint" style="margin:0">(how much more you sell each year)</span></span>
+        <div class="inp-affix"><input class="inp" id="growth" type="number" value="15" oninput="recalc()" style="padding-left:12px;padding-right:26px"><span class="pre" style="left:auto;right:12px">%</span></div>
+      </label>
+      <label class="field">
+        <span class="field-lbl">Yearly cost inflation <span class="hint" style="margin:0">(costs usually rise too)</span></span>
+        <div class="inp-affix"><input class="inp" id="inflation" type="number" value="8" oninput="recalc()" style="padding-left:12px;padding-right:26px"><span class="pre" style="left:auto;right:12px">%</span></div>
+      </label>
+      <label class="field">
+        <span class="field-lbl">Discount rate (for NPV) <span class="hint" style="margin:0">(usually 10%)</span></span>
+        <div class="inp-affix"><input class="inp" id="discount" type="number" value="10" oninput="recalc()" style="padding-left:12px;padding-right:26px"><span class="pre" style="left:auto;right:12px">%</span></div>
+      </label>
+    </div>
+
+    <div>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><div class="stat-lbl">Yr 1 revenue</div><div class="stat-val" id="r-rev1">$0</div></div>
+        <div class="stat gold"><div class="stat-lbl">Yr 1 profit (EBITDA)</div><div class="stat-val" id="r-ebitda1">$0</div></div>
+        <div class="stat sky"><div class="stat-lbl">5-yr total revenue</div><div class="stat-val" id="r-rev5">$0</div></div>
+        <div class="stat orange"><div class="stat-lbl">Net margin Yr 1</div><div class="stat-val" id="r-margin1">-</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">5-year projection</div>
+  <div class="card card-pad">
+    <div class="tbl-scroll">
+      <table class="tbl" id="projTbl">
+        <thead><tr><th>Line item</th></tr></thead>
+        <tbody id="projBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-label">Return metrics</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-lbl">ROI (year 1)</div><div class="stat-val" id="m-roi">-</div><div class="stat-note">return on capex</div></div>
+    <div class="stat gold"><div class="stat-lbl">Payback period</div><div class="stat-val" id="m-payback">-</div><div class="stat-note">time to recover capex</div></div>
+    <div class="stat sky"><div class="stat-lbl">NPV</div><div class="stat-val" id="m-npv">-</div><div class="stat-note">today's value of 5-yr profit</div></div>
+    <div class="stat orange"><div class="stat-lbl">Cumulative cash (5yr)</div><div class="stat-val" id="m-cumcash">-</div></div>
+  </div>
+</div>
+
+<!-- ============ BENCHMARK ============ -->
+<div class="page" id="page-benchmark">
+  <div class="page-head">
+    <h1 class="display">Market <span class="grad-text">Benchmarking</span></h1>
+    <p>Compare yourself to similar businesses to sanity-check your numbers and estimate realistic revenue. Below: who counts as a good comparison, how to reach them, and a tool to turn what you learn into a revenue estimate.</p>
+  </div>
+
+  <div class="section-label">Who qualifies as a good benchmark?</div>
+  <div class="card card-pad">
+    <div class="qual-item">
+      <div class="qual-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Same or similar product line.</strong> A business selling the same kind of thing you do, or a close substitute. Their cost structure and pricing will be closest to yours.</div>
+    </div>
+    <div class="qual-item">
+      <div class="qual-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Similar size and stage.</strong> Compare to businesses roughly your scale. A giant chain is not a fair mirror for a new small business.</div>
+    </div>
+    <div class="qual-item">
+      <div class="qual-ic" style="background:linear-gradient(135deg,var(--sky),var(--blue))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div><strong>If you sell offline:</strong> businesses <em>in your area</em>, or in an area with a similar income level and foot traffic. Location drives their pricing and volume.</div>
+    </div>
+    <div class="qual-item">
+      <div class="qual-ic" style="background:linear-gradient(135deg,var(--orange),var(--orange-dark))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div><strong>If you sell online:</strong> businesses selling <em>the same or similar products online</em>, regardless of location. You compete on the same digital shelf.</div>
+    </div>
+  </div>
+
+  <div class="section-label">How to reach them, methods that work</div>
+  <div class="bench-grid">
+    <div class="method-card">
+      <h4>Direct message <span class="badge blue">online</span></h4>
+      <p>Message similar sellers on Instagram, TikTok Shop, Tokopedia, or WhatsApp Business. Keep it friendly, short, and honest that you are starting out. Most owners are happy to share a little.</p>
+      <div class="script-box" id="script-dm">Hi! I am starting a small business selling [your product] and I really admire what you have built. Would you mind sharing roughly how many units you sell in a good month, and how you landed on your price? Anything helps, thank you!
+        <button class="copy-btn" onclick="copyScript('script-dm')">Copy</button></div>
+    </div>
+    <div class="method-card">
+      <h4>Wawancara / interview <span class="badge orange">offline</span></h4>
+      <p>Visit nearby shops or stalls in person. Buy something first, then ask a few genuine questions. Face-to-face gets richer answers than a message.</p>
+      <div class="script-box" id="script-int">Ask about: busiest days and times, roughly how many customers per day, price range of their bestseller, and where they buy their supplies. Keep it to 5 minutes and be respectful of their time.
+        <button class="copy-btn" onclick="copyScript('script-int')">Copy</button></div>
+    </div>
+    <div class="method-card">
+      <h4>Observation <span class="badge gold">offline</span></h4>
+      <p>Sit near a similar shop for an hour at peak time. Count customers and note what they buy. No conversation needed, just honest counting to estimate their traffic.</p>
+    </div>
+    <div class="method-card">
+      <h4>Public listings <span class="badge sky">online</span></h4>
+      <p>Marketplace pages show "sold" counts, ratings, and reviews. A product with 500 reviews has sold far more than 500 units, a rough floor for their volume.</p>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:18px">
+    <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Treat every number you collect as a rough estimate, not a fact. Gather 3 to 5 comparisons and use the middle, not the best case. Never share confidential info you were not offered.</div>
+  </div>
+
+  <div class="section-label">Turn benchmarks into a revenue estimate</div>
+  <div class="card card-pad">
+    <div class="card-head"><div><h3>Comparison worksheet</h3><div class="sub">Enter what you learned from each business. Cash Compass averages them into a monthly revenue estimate.</div></div></div>
+    <div class="tbl-scroll">
+      <table class="tbl" id="benchTbl">
+        <thead><tr>
+          <th>Business (nickname)</th>
+          <th class="num">Est. units / month</th>
+          <th class="num">Avg. price</th>
+          <th class="num">Est. monthly revenue</th>
+          <th style="width:34px"></th>
+        </tr></thead>
+        <tbody id="benchBody"></tbody>
+      </table>
+    </div>
+    <button class="add-line" onclick="addBench()" style="margin-top:14px">+ Add a business you compared</button>
+
+    <div class="stats" style="margin-top:22px">
+      <div class="stat"><div class="stat-lbl">Avg. benchmark revenue / mo</div><div class="stat-val" id="b-avg">-</div></div>
+      <div class="stat sky"><div class="stat-lbl">Conservative estimate (you)</div><div class="stat-val" id="b-cons">-</div><div class="stat-note">60% of benchmark avg</div></div>
+      <div class="stat gold"><div class="stat-lbl">Realistic estimate (you)</div><div class="stat-val" id="b-real">-</div><div class="stat-note">80% of benchmark avg</div></div>
+      <div class="stat orange"><div class="stat-lbl">vs your current plan</div><div class="stat-val" id="b-vs">-</div><div class="stat-note">your revenue / benchmark</div></div>
+    </div>
+    <div class="callout info" style="margin-top:18px">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+      <div id="benchVerdict">Add a few businesses above to see how your revenue plan compares to real players in your market.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SUMMARY ============ -->
+<div class="page" id="page-summary">
+  <div class="hero-banner">
+    <h2 class="display" id="dashTitle">Your Dashboard</h2>
+    <p>Everything at a glance. The health check of your business plan, updated live as you type.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-lbl">Products</div><div class="stat-val" id="d-prods">0</div></div>
+    <div class="stat gold"><div class="stat-lbl">Yr 1 revenue</div><div class="stat-val" id="d-rev">$0</div></div>
+    <div class="stat orange"><div class="stat-lbl">Yr 1 profit (EBITDA)</div><div class="stat-val" id="d-ebitda">$0</div></div>
+    <div class="stat sky"><div class="stat-lbl">Net margin</div><div class="stat-val" id="d-margin">-</div></div>
+    <div class="stat rose"><div class="stat-lbl">Payback</div><div class="stat-val" id="d-payback">-</div></div>
+  </div>
+
+  <div class="split" style="margin-top:22px">
+    <div class="card card-pad">
+      <div class="card-head"><div><h3>Revenue, profit &amp; costs</h3><div class="sub">5-year outlook</div></div></div>
+      <div class="chart-box"><canvas id="chartMain"></canvas></div>
+    </div>
+    <div class="card card-pad">
+      <div class="card-head"><div><h3>Where your money goes</h3><div class="sub">Cost breakdown</div></div></div>
+      <div class="chart-box"><canvas id="chartCost"></canvas></div>
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:20px">
+    <div class="card card-pad">
+      <div class="card-head"><div><h3>Cumulative cash flow</h3><div class="sub">When you turn net-positive</div></div></div>
+      <div class="chart-box sm"><canvas id="chartCash"></canvas></div>
+    </div>
+    <div class="card card-pad">
+      <div class="card-head"><div><h3>Revenue per product</h3><div class="sub">Monthly, year 1</div></div></div>
+      <div class="chart-box sm"><canvas id="chartProd"></canvas></div>
+    </div>
+  </div>
+
+  <div class="callout tip" style="margin-top:20px">
+    <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div id="healthCheck">Fill in your products, costs, and revenue assumptions to see your business health check here.</div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   STATE
+============================================================ */
+const KEY = 'cashcompass_v1';
+let state = {
+  bizName:'', baseYear:2025, growth:15, inflation:8, discount:10,
+  products:[],
+  expenses:{capex:[], production:[], operations:[], marketing:[]},
+  benchmarks:[]
+};
+let uid = () => Math.random().toString(36).slice(2,9);
+
+/* ---------- persistence ---------- */
+function save(){
+  state.bizName = document.getElementById('bizName').value;
+  state.baseYear = +val('baseYear',2025);
+  state.growth = +val('growth',15);
+  state.inflation = +val('inflation',8);
+  state.discount = +val('discount',10);
+  localStorage.setItem(KEY, JSON.stringify(state));
+  flashSaved();
+}
+function val(id,d){const e=document.getElementById(id);return e&&e.value!==''?e.value:d;}
+let savedTimer;
+function flashSaved(){
+  const t=document.getElementById('saveTxt');
+  t.textContent='Saving...';
+  clearTimeout(savedTimer);
+  savedTimer=setTimeout(()=>t.textContent='Saved locally',400);
+}
+function load(){
+  const raw=localStorage.getItem(KEY);
+  if(raw){try{state=Object.assign(state,JSON.parse(raw));}catch(e){}}
+  document.getElementById('bizName').value=state.bizName||'';
+  document.getElementById('baseYear').value=state.baseYear;
+  document.getElementById('growth').value=state.growth;
+  document.getElementById('inflation').value=state.inflation;
+  document.getElementById('discount').value=state.discount;
+  if(!state.products.length) seedDemo();
+  renderProducts(); renderExpenses(); renderBench();
+}
+
+/* ---------- format ---------- */
+const money = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString();
+const money2 = n => (n<0?'-':'')+'$'+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct = n => (n===null||!isFinite(n))?'-':(n>=0?'':'')+n.toFixed(1)+'%';
+
+/* ============================================================
+   TABS
+============================================================ */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('page-'+t.dataset.tab).classList.add('active');
+    if(t.dataset.tab==='summary') drawCharts();
+  };
+});
+
+/* ============================================================
+   PRODUCTS
+============================================================ */
+function seedDemo(){
+  state.products=[
+    {id:uid(),name:'Signature product',cost:3.36,margin:60,units:2500,expiry:12},
+    {id:uid(),name:'Wholesale / B2B pack',cost:3.36,margin:50,units:3000,expiry:12},
+  ];
+}
+function addProduct(){
+  state.products.push({id:uid(),name:'',cost:0,margin:50,units:0,expiry:''});
+  renderProducts(); save();
+}
+function delProduct(id){
+  state.products=state.products.filter(p=>p.id!==id);
+  renderProducts(); save();
+}
+function updProduct(id,field,v){
+  const p=state.products.find(x=>x.id===id); if(!p)return;
+  p[field]= field==='name'||field==='expiry' ? v : (parseFloat(v)||0);
+  renderPriceTable(); recalc(); save();
+}
+function sellPrice(p){ return p.cost*(1+p.margin/100); }
+
+function renderProducts(){
+  const el=document.getElementById('prodList');
+  if(!state.products.length){el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 8V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/></svg><div>No products yet. Add your first one below.</div></div>';renderPriceTable();recalc();return;}
+  el.innerHTML=state.products.map((p,i)=>`
+    <div class="prod-card">
+      <button class="del-prod" onclick="delProduct('${p.id}')" title="Remove">×</button>
+      <div class="prod-top">
+        <div class="prod-num">${i+1}</div>
+        <input class="inp" style="font-weight:600;max-width:340px" placeholder="Product name" value="${esc(p.name)}" oninput="updProduct('${p.id}','name',this.value)">
+      </div>
+      <div class="prod-grid">
+        <label class="field" style="margin:0">
+          <span class="field-lbl">Cost to make one (HPP)</span>
+          <div class="inp-affix"><span class="pre">$</span><input class="inp" type="number" step="0.01" value="${p.cost||''}" placeholder="0.00" oninput="updProduct('${p.id}','cost',this.value)"></div>
+        </label>
+        <label class="field" style="margin:0">
+          <span class="field-lbl">Profit margin</span>
+          <div class="inp-affix"><input class="inp" type="number" value="${p.margin||''}" placeholder="50" oninput="updProduct('${p.id}','margin',this.value)" style="padding-left:12px;padding-right:26px"><span class="pre" style="left:auto;right:12px">%</span></div>
+        </label>
+        <label class="field" style="margin:0">
+          <span class="field-lbl">Units sold / month</span>
+          <input class="inp" type="number" value="${p.units||''}" placeholder="0" oninput="updProduct('${p.id}','units',this.value)">
+        </label>
+        <label class="field" style="margin:0">
+          <span class="field-lbl">Shelf life <span class="hint" style="margin:0">(months, optional)</span></span>
+          <input class="inp" type="number" value="${p.expiry||''}" placeholder="-" oninput="updProduct('${p.id}','expiry',this.value)">
+        </label>
+      </div>
+      <div class="prod-calc">
+        <div class="mini-stat"><div class="l">Selling price</div><div class="v grad-text">${money2(sellPrice(p))}</div></div>
+        <div class="mini-stat"><div class="l">Profit / unit</div><div class="v">${money2(sellPrice(p)-p.cost)}</div></div>
+        <div class="mini-stat"><div class="l">Monthly revenue</div><div class="v">${money(sellPrice(p)*p.units)}</div></div>
+        <div class="mini-stat"><div class="l">Monthly profit</div><div class="v">${money((sellPrice(p)-p.cost)*p.units)}</div></div>
+      </div>
+    </div>`).join('');
+  renderPriceTable(); recalc();
+}
+function renderPriceTable(){
+  const b=document.getElementById('priceBody');
+  if(!state.products.length){b.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ink-faint);padding:20px">No products yet</td></tr>';return;}
+  let tRev=0;
+  b.innerHTML=state.products.map(p=>{
+    const sp=sellPrice(p), rev=sp*p.units; tRev+=rev;
+    return `<tr>
+      <td><strong>${esc(p.name)||'Untitled'}</strong></td>
+      <td class="num">${money2(p.cost)}</td>
+      <td class="num">${p.margin}%</td>
+      <td class="num">${money2(sp)}</td>
+      <td class="num">${money2(sp-p.cost)}</td>
+      <td class="num">${(p.units||0).toLocaleString()}</td>
+      <td class="num">${money(rev)}</td>
+    </tr>`;
+  }).join('')+`<tr class="row-strong"><td>Total monthly</td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">${money(tRev)}</td></tr>`;
+}
+
+/* ============================================================
+   EXPENSES
+============================================================ */
+const CATS=['capex','production','operations','marketing'];
+function seedExpenses(){
+  if(state.expenses.capex.length||state.expenses.production.length) return;
+  state.expenses.capex=[{id:uid(),name:'Equipment',amt:3334},{id:uid(),name:'Factory setup',amt:2779},{id:uid(),name:'Storage tanks',amt:1672}];
+  state.expenses.production=[{id:uid(),name:'Raw materials',amt:1672},{id:uid(),name:'Labor',amt:3378},{id:uid(),name:'Quality testing',amt:808}];
+  state.expenses.operations=[{id:uid(),name:'Rent & utilities',amt:861},{id:uid(),name:'Maintenance',amt:1667},{id:uid(),name:'Procurement',amt:1155}];
+  state.expenses.marketing=[{id:uid(),name:'Ads',amt:303},{id:uid(),name:'Influencer',amt:2273}];
+}
+function addExpense(cat){ state.expenses[cat].push({id:uid(),name:'',amt:0}); renderExpenses(); save(); }
+function delExpense(cat,id){ state.expenses[cat]=state.expenses[cat].filter(e=>e.id!==id); renderExpenses(); save(); }
+function updExpense(cat,id,field,v){
+  const e=state.expenses[cat].find(x=>x.id===id); if(!e)return;
+  e[field]= field==='name'?v:(parseFloat(v)||0);
+  renderExpenseTotals(); recalc(); save();
+}
+function renderExpenses(){
+  CATS.forEach(cat=>{
+    const el=document.getElementById('rows-'+cat);
+    el.innerHTML=state.expenses[cat].map(e=>`
+      <div class="exp-row">
+        <input class="inp" placeholder="What is it?" value="${esc(e.name)}" oninput="updExpense('${cat}','${e.id}','name',this.value)">
+        <div class="inp-affix"><span class="pre">$</span><input class="inp" type="number" value="${e.amt||''}" placeholder="0" oninput="updExpense('${cat}','${e.id}','amt',this.value)"></div>
+        <button class="del-prod" style="position:static" onclick="delExpense('${cat}','${e.id}')">×</button>
+      </div>`).join('');
+  });
+  renderExpenseTotals(); recalc();
+}
+function catTotal(cat){ return state.expenses[cat].reduce((s,e)=>s+e.amt,0); }
+function renderExpenseTotals(){
+  CATS.forEach(cat=>{ document.getElementById('tot-'+cat).textContent=money(catTotal(cat)); });
+}
+
+/* ============================================================
+   CORE FINANCIAL MODEL
+============================================================ */
+function monthlyRevenue(){ return state.products.reduce((s,p)=>s+sellPrice(p)*p.units,0); }
+function monthlyOpex(){ return catTotal('production')+catTotal('operations')+catTotal('marketing'); }
+function capexTotal(){ return catTotal('capex'); }
+
+function project(){
+  const growth=state.growth/100, infl=state.inflation/100, disc=state.discount/100;
+  const rev0=monthlyRevenue()*12, opex0=monthlyOpex()*12, capex=capexTotal();
+  const years=[]; let cum=-capex;
+  for(let i=0;i<5;i++){
+    const rev=rev0*Math.pow(1+growth,i);
+    const opex=opex0*Math.pow(1+infl,i);
+    const ebitda=rev-opex;
+    const capexThis = i===0?capex:0;
+    const netCash = ebitda-capexThis;
+    cum+= i===0 ? ebitda : ebitda;
+    years.push({year:state.baseYear+i, rev, opex, ebitda, netCash, cum});
+  }
+  let npv=-capex;
+  years.forEach((y,i)=>{ npv+= y.ebitda/Math.pow(1+disc,i+1); });
+  let payback=null, running=-capex;
+  for(let i=0;i<years.length;i++){
+    const prev=running; running+=years[i].ebitda;
+    if(prev<0 && running>=0){ payback=i+(0-prev)/years[i].ebitda; break; }
+  }
+  const roi = capex>0 ? (years[0].ebitda/capex*100) : null;
+  return {years,npv,payback,roi,capex,rev0,opex0};
+}
+
+function recalc(){
+  document.getElementById('s-capex').textContent=money(capexTotal());
+  document.getElementById('s-opex').textContent=money(monthlyOpex());
+  document.getElementById('s-opex-yr').textContent=money(monthlyOpex()*12);
+  const avgProfit = state.products.length? state.products.reduce((s,p)=>s+(sellPrice(p)-p.cost),0)/state.products.length : 0;
+  const be = avgProfit>0 ? Math.ceil(monthlyOpex()/avgProfit) : null;
+  document.getElementById('s-breakeven').textContent = be!==null&&isFinite(be) ? be.toLocaleString() : '-';
+
+  const P=project();
+  const y1=P.years[0];
+  document.getElementById('r-rev1').textContent=money(y1.rev);
+  document.getElementById('r-ebitda1').textContent=money(y1.ebitda);
+  document.getElementById('r-rev5').textContent=money(P.years.reduce((s,y)=>s+y.rev,0));
+  document.getElementById('r-margin1').textContent= y1.rev>0?pct(y1.ebitda/y1.rev*100):'-';
+  const em=document.getElementById('r-ebitda1'); em.className='stat-val '+(y1.ebitda>=0?'pos':'neg');
+
+  buildProjTable(P);
+
+  document.getElementById('m-roi').textContent = P.roi!==null?pct(P.roi):'-';
+  document.getElementById('m-payback').textContent = P.payback!==null?P.payback.toFixed(1)+' yr':(P.capex===0?'instant':'-');
+  document.getElementById('m-npv').textContent = money(P.npv);
+  document.getElementById('m-cumcash').textContent = money(P.years[4].cum);
+
+  document.getElementById('d-prods').textContent=state.products.length;
+  document.getElementById('d-rev').textContent=money(y1.rev);
+  document.getElementById('d-ebitda').textContent=money(y1.ebitda);
+  document.getElementById('d-margin').textContent= y1.rev>0?pct(y1.ebitda/y1.rev*100):'-';
+  document.getElementById('d-payback').textContent= P.payback!==null?P.payback.toFixed(1)+' yr':'-';
+  document.getElementById('dashTitle').textContent = state.bizName? state.bizName+' dashboard' : 'Your Dashboard';
+  document.getElementById('d-ebitda').className='stat-val '+(y1.ebitda>=0?'pos':'neg');
+
+  buildHealth(P);
+  renderBenchSummary();
+  if(document.getElementById('page-summary').classList.contains('active')) drawCharts();
+}
+
+function buildProjTable(P){
+  const head=document.querySelector('#projTbl thead tr');
+  head.innerHTML='<th>Line item</th>'+P.years.map(y=>`<th class="num">${y.year}</th>`).join('');
+  const rows=[
+    ['Revenue', P.years.map(y=>money(y.rev)), false],
+    ['Operating cost', P.years.map(y=>money(y.opex)), false],
+    ['EBITDA (profit)', P.years.map(y=>money(y.ebitda)), true],
+    ['Cumulative cash', P.years.map(y=>money(y.cum)), false],
+  ];
+  document.getElementById('projBody').innerHTML=rows.map(r=>
+    `<tr class="${r[2]?'row-strong':''}"><td>${r[0]}</td>${r[1].map(v=>`<td class="num">${v}</td>`).join('')}</tr>`
+  ).join('');
+}
+
+function buildHealth(P){
+  const y1=P.years[0]; const el=document.getElementById('healthCheck');
+  if(!state.products.length || monthlyRevenue()===0){
+    el.innerHTML='Fill in your products, costs, and revenue assumptions to see your business health check here.'; return;
+  }
+  const margin=y1.rev>0?y1.ebitda/y1.rev*100:0;
+  let msgs=[];
+  if(y1.ebitda>0) msgs.push(`You are projected to be <strong>profitable in year 1</strong> with ${money(y1.ebitda)} in EBITDA (${margin.toFixed(0)}% margin).`);
+  else msgs.push(`You are projected to <strong>lose money in year 1</strong>. Consider raising prices, cutting costs, or increasing volume.`);
+  if(P.payback!==null && P.payback<3) msgs.push(`Your upfront investment pays back in about <strong>${P.payback.toFixed(1)} years</strong>, healthy for a small business.`);
+  else if(P.payback!==null) msgs.push(`Payback takes <strong>${P.payback.toFixed(1)} years</strong>, a bit slow. Watch your capex.`);
+  if(margin>0 && margin<10) msgs.push(`Your margin is thin (${margin.toFixed(0)}%). Small cost increases could wipe out profit.`);
+  el.innerHTML=msgs.join(' ');
+}
+
+/* ============================================================
+   BENCHMARKING
+============================================================ */
+function seedBench(){ if(!state.benchmarks.length) state.benchmarks=[{id:uid(),name:'',units:'',price:''}]; }
+function addBench(){ state.benchmarks.push({id:uid(),name:'',units:'',price:''}); renderBench(); save(); }
+function delBench(id){ state.benchmarks=state.benchmarks.filter(b=>b.id!==id); renderBench(); save(); }
+function updBench(id,f,v){ const b=state.benchmarks.find(x=>x.id===id); if(!b)return; b[f]= f==='name'?v:(parseFloat(v)||0); renderBench(); save(); }
+function renderBench(){
+  const b=document.getElementById('benchBody');
+  if(!state.benchmarks.length){b.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--ink-faint);padding:20px">Add businesses you compared</td></tr>';renderBenchSummary();return;}
+  b.innerHTML=state.benchmarks.map(x=>{
+    const rev=(x.units||0)*(x.price||0);
+    return `<tr>
+      <td><input class="comp-inp" style="text-align:left" placeholder="e.g. Shop A" value="${esc(x.name)}" oninput="updBench('${x.id}','name',this.value)"></td>
+      <td class="num"><input class="comp-inp" type="number" placeholder="0" value="${x.units||''}" oninput="updBench('${x.id}','units',this.value)"></td>
+      <td class="num"><input class="comp-inp" type="number" step="0.01" placeholder="0.00" value="${x.price||''}" oninput="updBench('${x.id}','price',this.value)"></td>
+      <td class="num"><strong>${money(rev)}</strong></td>
+      <td><button class="del-prod" style="position:static" onclick="delBench('${x.id}')">×</button></td>
+    </tr>`;
+  }).join('');
+  renderBenchSummary();
+}
+function renderBenchSummary(){
+  const valid=state.benchmarks.filter(b=>b.units>0&&b.price>0);
+  const avgEl=document.getElementById('b-avg'), consEl=document.getElementById('b-cons'),
+        realEl=document.getElementById('b-real'), vsEl=document.getElementById('b-vs'),
+        vd=document.getElementById('benchVerdict');
+  if(!valid.length){
+    [avgEl,consEl,realEl,vsEl].forEach(e=>e.textContent='-');
+    vd.textContent='Add a few businesses above to see how your revenue plan compares to real players in your market.';
+    return;
+  }
+  const avg=valid.reduce((s,b)=>s+b.units*b.price,0)/valid.length;
+  avgEl.textContent=money(avg);
+  consEl.textContent=money(avg*0.6);
+  realEl.textContent=money(avg*0.8);
+  const mine=monthlyRevenue();
+  const ratio= avg>0? mine/avg*100 : null;
+  vsEl.textContent= ratio!==null? ratio.toFixed(0)+'%':'-';
+  if(mine===0){ vd.innerHTML='You have benchmark data from <strong>'+valid.length+'</strong> business'+(valid.length>1?'es':'')+'. Realistic monthly revenue for you: around <strong>'+money(avg*0.8)+'</strong>. Add your products to compare against your own plan.'; return; }
+  let verdict;
+  if(ratio>140) verdict=`Your plan (${money(mine)}/mo) is <strong>higher than the benchmark average</strong> (${money(avg)}). Ambitious. Make sure your volume assumptions are realistic.`;
+  else if(ratio>=70) verdict=`Your plan (${money(mine)}/mo) is <strong>in line with the market</strong> (benchmark avg ${money(avg)}). That is a healthy, realistic target.`;
+  else verdict=`Your plan (${money(mine)}/mo) is <strong>below the benchmark average</strong> (${money(avg)}). There may be room to grow, or your competitors are simply bigger.`;
+  vd.innerHTML=verdict;
+}
+
+/* ============================================================
+   CHARTS
+============================================================ */
+let charts={};
+function drawCharts(){
+  const P=project();
+  const labels=P.years.map(y=>y.year);
+  const C={blue:'#2563eb',blueLight:'#60a5fa',orange:'#f97316',orangeLight:'#fdba74',gold:'#eab308',rose:'#e11d48',sky:'#0ea5e9',ink:'#3b4a63',line:'#ecf1fa'};
+  Chart.defaults.font.family="'Inter',sans-serif";
+  Chart.defaults.font.size=11.5;
+  Chart.defaults.color=C.ink;
+  const grid={color:C.line,drawBorder:false};
+  const fmt=v=>'$'+(v>=1000?(v/1000).toFixed(0)+'k':v);
+
+  function gradient(ctx, c1, c2){
+    const g = ctx.createLinearGradient(0, 0, 0, 320);
+    g.addColorStop(0, c1); g.addColorStop(1, c2);
+    return g;
+  }
+
+  destroy('chartMain');
+  const mainCtx=document.getElementById('chartMain').getContext('2d');
+  charts.chartMain=new Chart(mainCtx,{
+    type:'bar',
+    data:{labels,datasets:[
+      {label:'Revenue',data:P.years.map(y=>Math.round(y.rev)),backgroundColor:gradient(mainCtx,'#2563eb','#60a5fa'),borderRadius:8,barPercentage:.7},
+      {label:'EBITDA',data:P.years.map(y=>Math.round(y.ebitda)),backgroundColor:gradient(mainCtx,'#f97316','#fdba74'),borderRadius:8,barPercentage:.7},
+      {label:'Costs',data:P.years.map(y=>Math.round(y.opex)),backgroundColor:gradient(mainCtx,'#e11d48','#fda4af'),borderRadius:8,barPercentage:.7},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:900,easing:'easeOutQuart'},
+      plugins:{legend:{position:'bottom',labels:{boxWidth:11,boxHeight:11,usePointStyle:true,pointStyle:'circle',padding:14}}},
+      scales:{y:{grid,ticks:{callback:fmt}},x:{grid:{display:false}}}}
+  });
+
+  destroy('chartCost');
+  const costData=[catTotal('production')*12,catTotal('operations')*12,catTotal('marketing')*12,capexTotal()];
+  charts.chartCost=new Chart(document.getElementById('chartCost'),{
+    type:'doughnut',
+    data:{labels:['Production','Operations','Marketing','Capex'],
+      datasets:[{data:costData.map(Math.round),backgroundColor:[C.orange,C.gold,C.rose,C.blue],borderWidth:3,borderColor:'#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',animation:{animateRotate:true,duration:1000},
+      plugins:{legend:{position:'bottom',labels:{boxWidth:11,boxHeight:11,usePointStyle:true,pointStyle:'circle',padding:12}}}}
+  });
+
+  destroy('chartCash');
+  const cashCtx=document.getElementById('chartCash').getContext('2d');
+  const cashGrad = cashCtx.createLinearGradient(0,0,0,240);
+  cashGrad.addColorStop(0,'rgba(37,99,235,.35)');
+  cashGrad.addColorStop(1,'rgba(249,115,22,.05)');
+  charts.chartCash=new Chart(cashCtx,{
+    type:'line',
+    data:{labels,datasets:[{label:'Cumulative cash',data:P.years.map(y=>Math.round(y.cum)),
+      borderColor:C.blue,backgroundColor:cashGrad,fill:true,tension:.35,pointRadius:5,pointBackgroundColor:C.orange,pointBorderColor:'#fff',pointBorderWidth:2,borderWidth:3}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:900},
+      plugins:{legend:{display:false}},
+      scales:{y:{grid,ticks:{callback:fmt}},x:{grid:{display:false}}}}
+  });
+
+  destroy('chartProd');
+  const prodCtx=document.getElementById('chartProd').getContext('2d');
+  const pl=state.products.map(p=>p.name||'Untitled');
+  const pr=state.products.map(p=>Math.round(sellPrice(p)*p.units));
+  const prodGrad = prodCtx.createLinearGradient(0,0,600,0);
+  prodGrad.addColorStop(0,'#2563eb');
+  prodGrad.addColorStop(1,'#f97316');
+  charts.chartProd=new Chart(prodCtx,{
+    type:'bar',
+    data:{labels:pl,datasets:[{label:'Monthly revenue',data:pr,backgroundColor:prodGrad,borderRadius:8}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:900},
+      plugins:{legend:{display:false}},
+      scales:{x:{grid,ticks:{callback:fmt}},y:{grid:{display:false}}}}
+  });
+}
+function destroy(id){ if(charts[id]){charts[id].destroy();delete charts[id];} }
+
+/* ============================================================
+   UTILS
+============================================================ */
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900);}
+function copyScript(id){
+  const box=document.getElementById(id).cloneNode(true);
+  const btn=box.querySelector('.copy-btn'); if(btn)btn.remove();
+  navigator.clipboard.writeText(box.textContent.trim()).then(()=>toast('Copied to clipboard'));
+}
+function exportData(){
+  save();
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=(state.bizName||'cash-compass')+'-backup.json';
+  a.click(); toast('Backup downloaded');
+}
+function importData(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+    r.onload=()=>{try{state=Object.assign(state,JSON.parse(r.result));save();load();recalc();toast('Restored');}catch(err){toast('Could not read that file');}};
+    r.readAsText(f);};
+  inp.click();
+}
+function fakeLogin(){
+  const b=document.getElementById('loginBtn');
+  if(b.textContent.includes('Sign in')){
+    b.textContent='you@gmail.com';
+    toast('Google sign-in is coming soon. Your data is saved in this browser for now.');
+  } else {
+    b.textContent='Sign in with Google';
+  }
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+seedExpenses(); seedBench();
+load();
+recalc();
+</script>
+</body>
+</html>
